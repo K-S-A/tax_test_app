@@ -22,5 +22,5 @@ inputs.each.with_index(1) do |data, i|
     c.add(product)
   end
 
-  io.export_to(cart.to_s, "cart#{i}.csv")
+  io.export_to(cart.to_csv, "cart#{i}.csv")
 end

@@ -49,9 +49,9 @@ RSpec.describe Cart do
     end
   end
 
-  context '#to_s' do
-    it 'should return string with cart items info, cart total and tax' do
-      expect(cart.to_s).to eq("1, book, 12.49\n"\
+  context '#to_csv' do
+    it 'should return csv-string with cart items info, cart total and tax' do
+      expect(cart.to_csv).to eq("1, book, 12.49\n"\
                               "1, music cd, 16.49\n"\
                               "1, chocolate bar, 0.85\n\n"\
                               "Sales Taxes: 1.5\n"\

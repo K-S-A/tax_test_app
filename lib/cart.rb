@@ -22,7 +22,7 @@ class Cart
     sum_for(:tax)
   end
 
-  def to_s
+  def to_csv
     data = items.map(&:to_s) << "\nSales Taxes: #{tax}" << "Total: #{total}"
     data.join("\n")
   end
