@@ -66,6 +66,6 @@ For cart item '1, box of imported chocolates, 11.25':
 - `import_tax_rate == 5`(%);
 - tax calculation:
   - `tax == 11.25 * (0 + 5) / 100.0` (returns `0.5625`);
-  - `rounded_tax == (0.5625 * 20).round / 20.0` (returns `0.55` that is nearest `0.05` value for `0.5625`);
+  - `rounded_tax == (0.5625 * 20).round / 20.0` (returns `0.55` that is nearest `0.05` rounded value for `0.5625`);
 
 That causes sales tax and total to differ by 0.05 from expected result.
