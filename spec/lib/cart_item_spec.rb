@@ -13,8 +13,8 @@ RSpec.describe CartItem do
       expect(cart_item.tax).to be_kind_of(Float)
     end
 
-    data_from_file('product_params').each do |product|
-      include_examples 'correct tax calculation for', product.values
+    data_from_file('product_params').each do |prod|
+      include_examples 'correct tax calculation for', prod.values
     end
   end
 
@@ -23,8 +23,8 @@ RSpec.describe CartItem do
       expect(cart_item.price).to be_kind_of(Float)
     end
 
-    data_from_file('product_params').each do |product|
-      include_examples 'correct price calculation for', product.values
+    data_from_file('product_params').each do |prod|
+      include_examples 'correct price calculation for', prod.values
     end
   end
 

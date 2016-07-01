@@ -16,7 +16,7 @@ end
 
 shared_examples 'correct value for' do |type, params, value|
   key = type == :total ? :price : type
-  prices = params.map { |h| h[key] }.join(', ')
+  prices = params.map { |h| h['price'] }.join(', ')
 
   it "should return #{value} for cart items with prices: #{prices}" do
     cart = described_class.new

@@ -28,7 +28,7 @@ class Cart
   end
 
   def add(product, quantity = 1)
-    self.items << CartItem.new(product, quantity)
+    items << CartItem.new(product, quantity)
   end
 
   private

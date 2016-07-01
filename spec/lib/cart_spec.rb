@@ -24,7 +24,7 @@ RSpec.describe Cart do
 
     include_examples 'correct value for', :total, data_from_file('product_params')[0..2], 29.83
     include_examples 'correct value for', :total, data_from_file('product_params')[3..4], 65.15
-    include_examples 'correct value for', :total, data_from_file('product_params')[5..8], 74.68
+    include_examples 'correct value for', :total, data_from_file('product_params')[5..8], 74.63
 
     context 'for empty cart' do
       it 'should return 0.0' do
@@ -40,7 +40,7 @@ RSpec.describe Cart do
 
     include_examples 'correct value for', :tax, data_from_file('product_params')[0..2], 1.50
     include_examples 'correct value for', :tax, data_from_file('product_params')[3..4], 7.65
-    include_examples 'correct value for', :tax, data_from_file('product_params')[5..8], 6.70
+    include_examples 'correct value for', :tax, data_from_file('product_params')[5..8], 6.65
 
     context 'for empty cart' do
       it 'should return 0.0' do

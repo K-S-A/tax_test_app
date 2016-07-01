@@ -17,7 +17,7 @@
 class CartItem
   attr_reader :product, :quantity
 
-  TAX_FREE_CATEGORIES = %w(book chocolate pills)
+  TAX_FREE_CATEGORIES = %w(book chocolate pills).freeze
 
   def initialize(product, quantity)
     @product = product
@@ -43,7 +43,7 @@ class CartItem
   private
 
   def basic_tax_rate
-    product.name =~ Regexp.new(TAX_FREE_CATEGORIES.join("|")) ? 0 : 10
+    product.name =~ Regexp.new(TAX_FREE_CATEGORIES.join('|')) ? 0 : 10
   end
 
   def import_tax_rate
