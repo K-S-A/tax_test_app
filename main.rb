@@ -9,18 +9,18 @@ Dir["#{File.expand_path(File.dirname(__FILE__))}/lib/*.rb"].each do |file|
 end
 
 io = Class.new { include Helpers }
-
 params = io.data_from_file('product_params')
 
-cart_items = params.map do |h|
-  CartItem.new(Product.new(h['name'], h['base_price']), h['quantity'])
+products = params.map do |h|
+  Product.new(h['name'], h['base_price'])
 end
 
-# Input 1
-Cart.new(*cart_items[0..2]).export_to('cart1.csv')
+inputs = [products[0..2], products[3..4], products[5..8]]
 
-# Input 2
-Cart.new(*cart_items[3..4]).export_to('cart2.csv')
+inputs.each.with_index(1) do |data, i|
+  cart = data.each.with_object(Cart.new) do |product, c|
+    c.add(product)
+  end
 
-# Input 3
-Cart.new(*cart_items[5..8]).export_to('cart3.csv')
+  io.export_to(cart.to_s, "cart#{i}.csv")
+end

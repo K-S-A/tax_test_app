@@ -1,5 +1,3 @@
-require_relative './modules/validator'
-
 ###############################################################################
 # This class holds name and base price of product.
 # Available public methods:
@@ -7,12 +5,10 @@ require_relative './modules/validator'
 # price => return price of product as Float
 ###############################################################################
 class Product
-  include Validator
-
   attr_reader :name, :price
 
   def initialize(name, price)
-    @name = validate_arg!(name, String)
-    @price = validate_arg!(price, Float)
+    @name = name
+    @price = price
   end
 end

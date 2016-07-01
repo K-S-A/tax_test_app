@@ -1,5 +1,3 @@
-require_relative './modules/validator'
-
 ###############################################################################
 # This class holds product (must respond to '#name' and '#price') and quantity.
 # Available public methods:
@@ -17,13 +15,13 @@ require_relative './modules/validator'
 # #to_s => return string representation of self as String.
 ###############################################################################
 class CartItem
-  include Validator
-
   attr_reader :product, :quantity
 
-  def initialize(product, quantity = 1)
-    @product, = validate_respond_to!(product, [:name, :price])
-    @quantity = validate_arg!(quantity, Integer)
+  TAX_FREE_CATEGORIES = %w(book chocolate pills)
+
+  def initialize(product, quantity)
+    @product = product
+    @quantity = quantity
   end
 
   def tax
@@ -45,7 +43,7 @@ class CartItem
   private
 
   def basic_tax_rate
-    product.name =~ /(book)|(chocolate)|(pills)/ ? 0 : 10
+    product.name =~ Regexp.new(TAX_FREE_CATEGORIES.join("|")) ? 0 : 10
   end
 
   def import_tax_rate

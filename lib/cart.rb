@@ -1,6 +1,3 @@
-require_relative './modules/file_export'
-require_relative './modules/validator'
-
 ###############################################################################
 # This class holds collection of items that have 'price' and 'tax' attributes.
 # Available public methods:
@@ -11,13 +8,10 @@ require_relative './modules/validator'
 #          sales tax and total.
 ###############################################################################
 class Cart
-  include FileExport
-  include Validator
-
   attr_reader :items
 
-  def initialize(*args)
-    @items = validate_respond_to!(*args, [:price, :tax, :to_s])
+  def initialize
+    @items = []
   end
 
   def total
@@ -31,6 +25,10 @@ class Cart
   def to_s
     data = items.map(&:to_s) << "\nSales Taxes: #{tax}" << "Total: #{total}"
     data.join("\n")
+  end
+
+  def add(product, quantity = 1)
+    self.items << CartItem.new(product, quantity)
   end
 
   private
