@@ -1,5 +1,21 @@
 require_relative './modules/validator'
 
+###############################################################################
+# This class holds product (must respond to '#name' and '#price') and quantity.
+# Available public methods:
+# #product => return Product instance.
+# #tax => return as Float (rounded to 2 decimal places).
+# #quantity => return number of ordered products as Integer (default 1).
+# #name => return name of the product as String.
+# #tax => return:
+#   - 10% from product price (except books, food, and medical products);
+#   - 0.0 for books, food, and medical products;
+#   - additional 5% for all imported products.
+#   As Float (rounded to the nearest 0.05).
+# #price => return price of the product (including tax)
+#           as Float (rounded to 2 decimal places).
+# #to_s => return string representation of self as String.
+###############################################################################
 class CartItem
   include Validator
 
