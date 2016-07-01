@@ -10,6 +10,10 @@ module Helpers
       JSON.parse(read_file(name))
     end
 
+    def export_to(value, file_name)
+      File.write("export/#{file_name}", value)
+    end
+
     private
 
     # read data for spec examples from file

@@ -1,19 +1,19 @@
 RSpec.describe Cart do
-  let(:cart_items) do
+  let(:products) do
     data_from_file('product_params')[0..2].map do |h|
-      CartItem.new(Product.new(h['name'], h['base_price']))
+      Product.new(h['name'], h['base_price'])
     end
   end
 
-  let(:cart) { described_class.new(*cart_items) }
+  let(:cart) do
+    products.each.with_object(described_class.new) do |prod, cart|
+      cart.add(prod)
+    end
+  end
 
   context '.new' do
     it 'can be initialized witout arguments' do
       expect { described_class.new }.not_to raise_error
-    end
-
-    it 'should raise ArgumentError unless all arguments respond to #tax, #price and #to_s' do
-      expect { described_class.new(name: 'book') }.to raise_error(ArgumentError, /Expected all arguments to respond/)
     end
   end
 
@@ -65,7 +65,7 @@ RSpec.describe Cart do
     end
 
     it 'should return array of cart items' do
-      expect(cart.items).to eq(cart_items)
+      expect(cart.items.all? { |i| i.class == CartItem }).to be_truthy
     end
 
     context 'for empty cart' do

@@ -1,18 +1,10 @@
 RSpec.describe CartItem do
   let(:product) { Product.new('book', 12.49) }
-  let(:cart_item) { described_class.new(product) }
+  let(:cart_item) { described_class.new(product, 1) }
 
   context '.new' do
     it 'should not be initialized witout arguments' do
-      expect { described_class.new }.to raise_error(ArgumentError, /given 0, expected 1..2/)
-    end
-
-    it 'should raise ArgumentError if second argument is not Integer' do
-      expect { described_class.new(product, 12.49) }.to raise_error(ArgumentError, /Expected Integer/)
-    end
-
-    it 'should raise ArgumentError if first argument not respond to #name and #price' do
-      expect { described_class.new({ name: 'book' }, 1) }.to raise_error(ArgumentError, /Expected all arguments to respond/)
+      expect { described_class.new }.to raise_error(ArgumentError, /given 0, expected 2/)
     end
   end
 

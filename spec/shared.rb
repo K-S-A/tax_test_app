@@ -15,14 +15,14 @@ shared_examples 'correct price calculation for' do |quantity, name, base, _, pri
 end
 
 shared_examples 'correct value for' do |type, params, value|
-  cart_items = params.map do |h|
-    CartItem.new(Product.new(h['name'], h['base_price']), h['quantity'])
-  end
-
-  item_mthd = type == :total ? :price : type
-  prices = cart_items.map(&item_mthd).join(', ')
+  key = type == :total ? :price : type
+  prices = params.map { |h| h[key] }.join(', ')
 
   it "should return #{value} for cart items with prices: #{prices}" do
-    expect(described_class.new(*cart_items).public_send(type)).to eq(value)
+    cart = described_class.new
+    products = params.map { |h| Product.new(h['name'], h['base_price']) }
+    products.each { |product| cart.add(product) }
+
+    expect(cart.public_send(type)).to eq(value)
   end
 end

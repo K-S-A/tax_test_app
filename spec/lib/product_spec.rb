@@ -10,14 +10,6 @@ RSpec.describe Product do
       expect { product }.not_to raise_error
     end
 
-    it 'should raise ArgumentError if first argument is not String' do
-      expect { described_class.new(252, 12.49) }.to raise_error(ArgumentError, /Expected String/)
-    end
-
-    it 'should raise ArgumentError if second argument is not a number' do
-      expect { described_class.new('book', '123') }.to raise_error(ArgumentError, /Expected Float/)
-    end
-
     it 'assigns @name' do
       expect(product.instance_variable_get(:@name)).to eq('book')
     end
